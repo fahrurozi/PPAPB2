@@ -57,4 +57,15 @@ tools:context=".MainActivity">
         tools:layout_editor_absoluteY="288dp" />
 </ScrollView>
 
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/fragment"
+        android:name="com.example.fragmentexample1updated.SimpleFragment"
+        tools:layout="@layout/fragment_simple"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
