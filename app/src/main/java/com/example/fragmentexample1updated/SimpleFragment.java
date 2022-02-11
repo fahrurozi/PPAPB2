@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class SimpleFragment extends Fragment {
+
+    private static final int YES = 0;
+    private static final int NO = 1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +53,12 @@ public class SimpleFragment extends Fragment {
         return fragment;
     }
 
+    public static SimpleFragment newInstance(){
+        SimpleFragment fragment = new SimpleFragment();
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +71,30 @@ public class SimpleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_simple, container, false);
+        RadioGroup radioGroup = view.findViewById(R.id.radio_group);
+        TextView articleQuestionTextView = view.findViewById(R.id.question_textview);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton btn = radioGroup.findViewById(i);
+                int selectedIndex = radioGroup.indexOfChild(btn);
+
+                switch (selectedIndex){
+                    case YES:
+                        articleQuestionTextView.setText(R.string.yes_message);
+                        break;
+                    case NO:
+                        articleQuestionTextView.setText(R.string.no_message);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_simple, container, false);
+        return view;
     }
 }
